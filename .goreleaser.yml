@@ -30,3 +30,28 @@ changelog:
     exclude:
       - '^docs:'
       - '^test:'
+dockers:
+  -
+    goos: linux
+    goarch: amd64
+    ids:
+      - optimus
+    dockerfile: Dockerfile
+    image_templates:
+      - 'docker.io/odpf/{{.ProjectName}}:latest'
+      - 'docker.io/odpf/{{.ProjectName}}:{{ .Version }}'
+      - 'docker.io/odpf/{{.ProjectName}}:{{ .Tag }}-amd64'
+brews:
+  - name: graystack-temp
+    tap:
+      owner: GrayFlash
+      name: homebrew-taps
+    folder: Formula
+    dependencies:
+      - name: git
+    install: |-
+      bin.install "go-releaser"
+    commit_author:
+      name: Gaurav Kumar
+      email: gk74533@gmail.com
+      
